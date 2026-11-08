@@ -2,6 +2,10 @@ import os
 import sqlite3
 import logging
 import secrets
+import asyncio
+import base64
+import json
+import urllib.request
 
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
@@ -19,6 +23,56 @@ logger = logging.getLogger(__name__)
 TOKEN = os.environ["BOT_TOKEN"]
 ADMIN_ID = 7572110906
 DB = os.getenv("DB_PATH", "bot_data.db")
+GITHUB_REPO = os.getenv("GITHUB_REPO", "kanhuroul001-ai/Paid_cm_bot")
+GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "stars-payment")
+
+
+def sync_website_catalogue_sync():
+    token = os.getenv("GITHUB_TOKEN")
+    if not token:
+        raise RuntimeError("Render environment mein GITHUB_TOKEN set nahi hai.")
+
+    with connect() as con:
+        rows = con.execute("SELECT id,title FROM videos ORDER BY id DESC").fetchall()
+    payload = json.dumps([{"id": row["id"], "title": row["title"]} for row in rows], ensure_ascii=False)
+    api_url = f"https://api.github.com/repos/{GITHUB_REPO}/contents/videos.json?ref={GITHUB_BRANCH}"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+        "User-Agent": "ClipsminesBot",
+    }
+    request = urllib.request.Request(api_url, headers=headers)
+    with urllib.request.urlopen(request, timeout=20) as response:
+        current = json.loads(response.read().decode("utf-8"))
+    body = {
+        "message": "Sync sample video catalogue from Telegram admin",
+        "content": base64.b64encode(payload.encode("utf-8")).decode("ascii"),
+        "sha": current["sha"],
+        "branch": GITHUB_BRANCH,
+    }
+    request = urllib.request.Request(
+        f"https://api.github.com/repos/{GITHUB_REPO}/contents/videos.json",
+        data=json.dumps(body).encode("utf-8"),
+        headers={**headers, "Content-Type": "application/json"},
+        method="PUT",
+    )
+    with urllib.request.urlopen(request, timeout=20) as response:
+        response.read()
+
+
+async def sync_website_catalogue(update):
+    try:
+        await asyncio.to_thread(sync_website_catalogue_sync)
+        await update.message.reply_text("🌐 Website catalogue successfully updated!")
+        return True
+    except Exception as exc:
+        logger.exception("Website catalogue sync failed")
+        await update.message.reply_text(
+            "⚠️ Telegram catalogue update ho gaya, lekin website sync nahi hua. "
+            f"Admin setup check karo. Details: {str(exc)[:250]}"
+        )
+        return False
 
 
 def connect():
@@ -131,6 +185,7 @@ async def admin_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"✅ Sample video added!\nID: {video_id}\nName: {title}\n"
         "Customers ise /videos mein dekh sakte hain."
     )
+    await sync_website_catalogue(update)
 
 
 async def listvideos(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -168,6 +223,13 @@ async def deletevideo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         f"🗑️ Sample delete ho gaya.\nID: {video_id}\nName: {video['title']}"
     )
+    await sync_website_catalogue(update)
+
+
+async def syncwebsite(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_admin(update):
+        return
+    await sync_website_catalogue(update)
 
 
 async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -192,6 +254,7 @@ async def admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "All sample videos:\n/listvideos\n\n"
         "Delete a sample video:\n/deletevideo VIDEO_ID\n\n"
         "Bot stats:\n/stats\n\n"
+        "/syncwebsite - Website catalogue manually sync\n\n"
         "/videos - Customer sample catalogue"
     )
 
@@ -206,6 +269,7 @@ def main():
     app.add_handler(CommandHandler("listvideos", listvideos))
     app.add_handler(CommandHandler("deletevideo", deletevideo))
     app.add_handler(CommandHandler("stats", stats))
+    app.add_handler(CommandHandler("syncwebsite", syncwebsite))
     app.add_handler(CallbackQueryHandler(show_sample, pattern=r"^sample:"))
     app.add_handler(
         MessageHandler(
