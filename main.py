@@ -452,6 +452,96 @@ async def setprice(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Video ID nahi mila.")
 
 
+
+async def listvideos(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_admin(update):
+        return
+    with connect() as con:
+        rows = con.execute(
+            "SELECT id,title,stars_price FROM videos ORDER BY id DESC"
+        ).fetchall()
+    if not rows:
+        await update.message.reply_text("Abhi koi video upload nahi hai.")
+        return
+
+    lines = ["🎬 CLIPSMINES VIDEO LIST", ""]
+    for row in rows:
+        lines.append(f"ID: {row['id']} | ⭐ {row['stars_price']} Stars\\n{row['title']}")
+    chunk = ""
+    for line in lines:
+        candidate = f"{chunk}\\n{line}" if chunk else line
+        if len(candidate) > 3500 and chunk:
+            await update.message.reply_text(chunk)
+            chunk = line
+        else:
+            chunk = candidate
+    if chunk:
+        await update.message.reply_text(chunk)
+
+
+async def deletevideo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_admin(update):
+        return
+    if len(context.args) != 1 or not context.args[0].isdigit():
+        await update.message.reply_text("Format: /deletevideo VIDEO_ID\\nExample: /deletevideo 1")
+        return
+    video_id = int(context.args[0])
+    with connect() as con:
+        video = con.execute(
+            "SELECT id,title FROM videos WHERE id=?", (video_id,)
+        ).fetchone()
+        if not video:
+            await update.message.reply_text("Video ID nahi mila.")
+            return
+        protected = con.execute(
+            """SELECT id FROM orders
+               WHERE video_id=? AND status IN ('delivering','delivery_pending')
+               LIMIT 1""",
+            (video_id,)
+        ).fetchone()
+        if protected:
+            await update.message.reply_text(
+                f"Video delete nahi kar sakte: paid order #{protected['id']} ki delivery pending hai. "
+                "Pehle /retrydelivery se delivery resolve karo."
+            )
+            return
+        con.execute("DELETE FROM videos WHERE id=?", (video_id,))
+    await update.message.reply_text(
+        f"🗑️ Video delete ho gaya.\\nID: {video_id}\\nName: {video['title']}"
+    )
+
+
+async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_admin(update):
+        return
+    with connect() as con:
+        video_count = con.execute(
+            "SELECT COUNT(*) AS n FROM videos"
+        ).fetchone()["n"]
+        order_counts = {
+            row["status"]: row["n"]
+            for row in con.execute(
+                "SELECT status,COUNT(*) AS n FROM orders GROUP BY status"
+            ).fetchall()
+        }
+        paid = con.execute(
+            """SELECT COUNT(*) AS n, COALESCE(SUM(stars_amount),0) AS total
+               FROM orders WHERE telegram_payment_charge_id IS NOT NULL"""
+        ).fetchone()
+    delivered = order_counts.get("delivered", 0)
+    pending_delivery = order_counts.get("delivery_pending", 0) + order_counts.get("delivering", 0)
+    awaiting = order_counts.get("awaiting_payment", 0)
+    await update.message.reply_text(
+        "📊 CLIPSMINES STATS\\n\\n"
+        f"🎬 Total videos: {video_count}\\n"
+        f"🧾 Total paid orders: {paid['n']}\\n"
+        f"⭐ Stars received: {paid['total']}\\n"
+        f"✅ Delivered orders: {delivered}\\n"
+        f"⏳ Paid delivery pending: {pending_delivery}\\n"
+        f"💳 Awaiting payment: {awaiting}"
+    )
+
+
 async def admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update):
         return
@@ -463,7 +553,13 @@ async def admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/setprice 1 25\n\n"
         "Failed paid delivery retry:\n"
         "/retrydelivery ORDER_ID\n\n"
-        "/videos - Video list"
+        "All uploaded videos:\\n"
+        "/listvideos\\n\\n"
+        "Delete a video:\\n"
+        "/deletevideo VIDEO_ID\\n\\n"
+        "Bot stats:\\n"
+        "/stats\\n\\n"
+        "/videos - Customer video list"
     )
 
 
@@ -477,6 +573,9 @@ def main():
     app.add_handler(CommandHandler("setprice", setprice))
     app.add_handler(CommandHandler("cancelorder", cancel_order))
     app.add_handler(CommandHandler("retrydelivery", retry_delivery))
+    app.add_handler(CommandHandler("listvideos", listvideos))
+    app.add_handler(CommandHandler("deletevideo", deletevideo))
+    app.add_handler(CommandHandler("stats", stats))
 
     app.add_handler(CallbackQueryHandler(buy, pattern=r"^buy:"))
     app.add_handler(PreCheckoutQueryHandler(precheckout))
