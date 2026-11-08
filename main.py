@@ -1,22 +1,32 @@
 import os
 import sqlite3
 import logging
+import secrets
 
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import (
+    Update,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    LabeledPrice,
+)
 from telegram.ext import (
     Application,
     CommandHandler,
     MessageHandler,
     CallbackQueryHandler,
+    PreCheckoutQueryHandler,
     ContextTypes,
     filters,
 )
 
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 TOKEN = os.environ["BOT_TOKEN"]
 ADMIN_ID = 7572110906
 DB = os.getenv("DB_PATH", "bot_data.db")
+DEFAULT_STARS_PRICE = 25
+CURRENCY = "XTR"
 
 
 def connect():
@@ -35,18 +45,16 @@ def setup():
             CREATE TABLE IF NOT EXISTS videos (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 title TEXT NOT NULL,
-                price INTEGER NOT NULL,
+                price INTEGER NOT NULL DEFAULT 25,
                 file_id TEXT NOT NULL
             )
         """)
-
         con.execute("""
             CREATE TABLE IF NOT EXISTS settings (
                 key TEXT PRIMARY KEY,
                 value TEXT NOT NULL
             )
         """)
-
         con.execute("""
             CREATE TABLE IF NOT EXISTS orders (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -56,39 +64,49 @@ def setup():
             )
         """)
 
+        # Safe migrations for databases created by the previous Paytm version.
+        video_columns = {
+            row["name"] for row in
+            con.execute("PRAGMA table_info(videos)").fetchall()
+        }
+        if "stars_price" not in video_columns:
+            con.execute(
+                "ALTER TABLE videos ADD COLUMN stars_price INTEGER NOT NULL DEFAULT 25"
+            )
+        # User selected a uniform price of 25 Stars for all existing videos.
+        con.execute("UPDATE videos SET stars_price=?", (DEFAULT_STARS_PRICE,))
 
-def get_setting(key):
-    with connect() as con:
-        row = con.execute(
-            "SELECT value FROM settings WHERE key=?",
-            (key,)
-        ).fetchone()
-        return row["value"] if row else None
-
-
-def set_setting(key, value):
-    with connect() as con:
-        con.execute(
-            "INSERT OR REPLACE INTO settings VALUES (?,?)",
-            (key, value)
-        )
+        order_columns = {
+            row["name"] for row in
+            con.execute("PRAGMA table_info(orders)").fetchall()
+        }
+        migrations = {
+            "payload": "TEXT",
+            "stars_amount": "INTEGER",
+            "currency": "TEXT",
+            "telegram_payment_charge_id": "TEXT",
+        }
+        for column, definition in migrations.items():
+            if column not in order_columns:
+                con.execute(f"ALTER TABLE orders ADD COLUMN {column} {definition}")
 
 
 def is_admin(update):
-    return update.effective_user.id == ADMIN_ID
+    return bool(update.effective_user and update.effective_user.id == ADMIN_ID)
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "Welcome! 🎬\n\n"
-        "Available videos dekhne ke liye /videos bhejo."
+        "Welcome to Clipsmines! 🎬\n\n"
+        "Videos dekhne ke liye /videos bhejo.\n"
+        "Har video ki price: ⭐ 25 Telegram Stars."
     )
 
 
 async def videos(update: Update, context: ContextTypes.DEFAULT_TYPE):
     with connect() as con:
         rows = con.execute(
-            "SELECT id,title,price FROM videos ORDER BY id DESC"
+            "SELECT id,title,stars_price FROM videos ORDER BY id DESC"
         ).fetchall()
 
     if not rows:
@@ -97,407 +115,374 @@ async def videos(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     buttons = [
         [InlineKeyboardButton(
-            f"🎬 {row['title']} - ₹{row['price']}",
+            f"🎬 {row['title']} — ⭐ {row['stars_price']}",
             callback_data=f"buy:{row['id']}"
         )]
         for row in rows
     ]
-
     await update.message.reply_text(
-        "Apna video select karo:",
+        "Apna video select karo. Payment Telegram Stars se hoga:",
         reply_markup=InlineKeyboardMarkup(buttons)
     )
 
 
 async def buy(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    q = update.callback_query
-    await q.answer()
+    query = update.callback_query
+    await query.answer()
 
-    video_id = int(q.data.split(":")[1])
-    user_id = q.from_user.id
-    qr = get_setting("qr")
-
-    if not qr:
-        await q.message.reply_text("Payment QR abhi set nahi hua hai.")
+    try:
+        video_id = int(query.data.split(":", 1)[1])
+    except (ValueError, IndexError):
+        await query.message.reply_text("Invalid video selection.")
         return
 
+    user_id = query.from_user.id
     with connect() as con:
         video = con.execute(
-            "SELECT title,price FROM videos WHERE id=?",
+            "SELECT id,title,stars_price FROM videos WHERE id=?",
             (video_id,)
         ).fetchone()
-
         if not video:
-            await q.message.reply_text("Video available nahi hai.")
+            await query.message.reply_text("Video available nahi hai.")
             return
 
         active = con.execute(
             """SELECT id FROM orders
-            WHERE user_id=? AND status IN
-            ('waiting','submitted','delivering')
-            LIMIT 1""",
+               WHERE user_id=? AND status IN
+               ('awaiting_payment','delivering','delivery_pending')
+               LIMIT 1""",
             (user_id,)
         ).fetchone()
-
         if active:
-            await q.message.reply_text(
-                f"Tumhara order #{active['id']} abhi process mein hai. "
-                "Pehle uska result aane do."
+            await query.message.reply_text(
+                f"Tumhara order #{active['id']} abhi pending hai. "
+                "Agar invoice pay nahi karna, /cancelorder bhejo."
             )
+            return
+
+        stars = int(video["stars_price"] or DEFAULT_STARS_PRICE)
+        if stars < 1:
+            await query.message.reply_text("Is video ki price abhi valid nahi hai.")
             return
 
         cur = con.execute(
             """INSERT INTO orders
-            (user_id,video_id,status) VALUES (?,?,?)""",
-            (user_id, video_id, "waiting")
+               (user_id,video_id,status,stars_amount,currency)
+               VALUES (?,?,?,?,?)""",
+            (user_id, video_id, "awaiting_payment", stars, CURRENCY)
         )
         order_id = cur.lastrowid
-
-    await context.bot.send_photo(
-        chat_id=user_id,
-        photo=qr,
-        caption=(
-            f"🎬 {video['title']}\n"
-            f"💰 Amount: ₹{video['price']}\n"
-            f"🧾 Order ID: #{order_id}\n\n"
-            "QR scan karke exact amount pay karo. "
-            "Payment ke baad screenshot isi chat mein bhejo."
-        )
-    )
-
-
-async def payment_proof(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    user_id = update.effective_user.id
-
-    if user_id == ADMIN_ID:
-        return
-
-    if not update.message.photo:
-        return
-
-    with connect() as con:
-        order = con.execute(
-            """SELECT id,video_id FROM orders
-            WHERE user_id=? AND status='waiting'
-            ORDER BY id DESC LIMIT 1""",
-            (user_id,)
-        ).fetchone()
-
-        if not order:
-            await update.message.reply_text(
-                "Pehle /videos se video select karo."
-            )
-            return
-
-        order_id = order["id"]
-        video_id = order["video_id"]
-
-        video = con.execute(
-            "SELECT title,price FROM videos WHERE id=?",
-            (video_id,)
-        ).fetchone()
-
-        con.execute(
-            "UPDATE orders SET status='submitted' WHERE id=?",
-            (order_id,)
-        )
-
-    keyboard = InlineKeyboardMarkup([[
-        InlineKeyboardButton(
-            "✅ Approve",
-            callback_data=f"approve:{order_id}"
-        ),
-        InlineKeyboardButton(
-            "❌ Reject",
-            callback_data=f"reject:{order_id}"
-        )
-    ]])
+        payload = f"clipsmines:{order_id}:{user_id}:{secrets.token_urlsafe(12)}"
+        con.execute("UPDATE orders SET payload=? WHERE id=?", (payload, order_id))
 
     try:
-        await context.bot.send_photo(
-            chat_id=ADMIN_ID,
-            photo=update.message.photo[-1].file_id,
-            caption=(
-                f"💳 PAYMENT REVIEW\n"
-                f"Order: #{order_id}\n"
-                f"Customer ID: {user_id}\n"
-                f"Video: {video['title']}\n"
-                f"Amount: ₹{video['price']}\n\n"
-                "Paytm transaction history mein payment verify karo."
-            ),
-            reply_markup=keyboard
+        await context.bot.send_invoice(
+            chat_id=user_id,
+            title=video["title"][:32],
+            description=f"Clipsmines video access: {video['title']}"[:255],
+            payload=payload,
+            provider_token="",
+            currency=CURRENCY,
+            prices=[LabeledPrice(label=video["title"][:32], amount=stars)],
+            start_parameter=f"video_{video_id}",
         )
-
-        await update.message.reply_text(
-            "✅ Screenshot admin ko bhej diya gaya hai. "
-            "Verification ke baad video milega."
-        )
-
     except Exception:
+        logger.exception("Could not send Stars invoice for order %s", order_id)
         with connect() as con:
             con.execute(
-                "UPDATE orders SET status='waiting' WHERE id=?",
+                "UPDATE orders SET status='invoice_failed' WHERE id=? AND status='awaiting_payment'",
                 (order_id,)
             )
-        await update.message.reply_text(
-            "Screenshot bhejne mein problem hui. Dobara try karo."
+        await query.message.reply_text(
+            "Stars invoice bhejne mein problem hui. Thodi der baad dobara try karo."
         )
 
 
-async def admin_action(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    q = update.callback_query
-
-    if q.from_user.id != ADMIN_ID:
-        await q.answer("Not authorized!", show_alert=True)
-        return
-
-    await q.answer()
-
-    action, order_text = q.data.split(":")
-    order_id = int(order_text)
-
+async def cancel_order(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
     with connect() as con:
-        order = con.execute(
-            """SELECT user_id,video_id,status
-            FROM orders WHERE id=?""",
-            (order_id,)
-        ).fetchone()
+        cur = con.execute(
+            """UPDATE orders SET status='cancelled'
+               WHERE user_id=? AND status='awaiting_payment'""",
+            (user_id,)
+        )
+    if cur.rowcount:
+        await update.message.reply_text("Pending unpaid order cancel ho gaya. /videos se dobara select karo.")
+    else:
+        await update.message.reply_text("Koi pending unpaid order nahi mila.")
 
-        if not order or order["status"] != "submitted":
-            await q.message.reply_text(
-                "Order already processed or not available."
+
+async def precheckout(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.pre_checkout_query
+    try:
+        with connect() as con:
+            order = con.execute(
+                """SELECT user_id,video_id,status,payload,stars_amount,currency
+                   FROM orders WHERE payload=?""",
+                (query.invoice_payload,)
+            ).fetchone()
+
+        valid = (
+            order is not None
+            and order["user_id"] == query.from_user.id
+            and order["status"] == "awaiting_payment"
+            and order["currency"] == CURRENCY
+            and order["stars_amount"] == query.total_amount
+            and query.currency == CURRENCY
+        )
+        if not valid:
+            await query.answer(
+                ok=False,
+                error_message="Order details match nahi karte. /videos se naya order banao."
             )
             return
 
-        user_id = order["user_id"]
-        video_id = order["video_id"]
+        await query.answer(ok=True)
+    except Exception:
+        logger.exception("Pre-checkout validation failed")
+        await query.answer(
+            ok=False,
+            error_message="Payment verify nahi ho paya. Dobara try karo."
+        )
 
-        if action == "reject":
+
+async def successful_payment(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    message = update.message
+    payment = message.successful_payment
+    user_id = update.effective_user.id
+
+    with connect() as con:
+        con.execute("BEGIN IMMEDIATE")
+        order = con.execute(
+            """SELECT id,user_id,video_id,status,payload,stars_amount,currency
+               FROM orders WHERE payload=?""",
+            (payment.invoice_payload,)
+        ).fetchone()
+
+        if (
+            not order
+            or order["user_id"] != user_id
+            or order["currency"] != CURRENCY
+            or order["stars_amount"] != payment.total_amount
+            or payment.currency != CURRENCY
+        ):
+            con.rollback()
+            await message.reply_text(
+                "Payment details verify nahi ho paaye. Admin se contact karo."
+            )
+            return
+
+        if order["status"] in ("delivered", "delivering", "delivery_pending"):
+            con.rollback()
+            await message.reply_text(
+                f"Payment receive ho chuka hai. Order #{order['id']} ka status check ho raha hai."
+            )
+            return
+
+        if order["status"] != "awaiting_payment":
+            con.rollback()
+            await message.reply_text("Yeh order ab active nahi hai. Admin se contact karo.")
+            return
+
+        con.execute(
+            """UPDATE orders
+               SET status='delivering',telegram_payment_charge_id=?
+               WHERE id=? AND status='awaiting_payment'""",
+            (payment.telegram_payment_charge_id, order["id"])
+        )
+        video = con.execute(
+            "SELECT title,file_id FROM videos WHERE id=?",
+            (order["video_id"],)
+        ).fetchone()
+        con.commit()
+
+    if not video:
+        with connect() as con:
             con.execute(
-                "UPDATE orders SET status='rejected' WHERE id=?",
-                (order_id,)
+                "UPDATE orders SET status='delivery_pending' WHERE id=?",
+                (order["id"],)
             )
-            video = None
-        else:
-            video = con.execute(
-                "SELECT title,file_id FROM videos WHERE id=?",
-                (video_id,)
-            ).fetchone()
-
-            if not video:
-                await q.message.reply_text("Video not found.")
-                return
-
-            con.execute(
-                "UPDATE orders SET status='delivering' WHERE id=?",
-                (order_id,)
-            )
-
-    if action == "reject":
-        try:
-            await context.bot.send_message(
-                chat_id=user_id,
-                text="Payment approve nahi hua. Admin se contact karo."
-            )
-        except Exception:
-            pass
-
-        await q.message.reply_text(f"Order #{order_id} rejected.")
+        await message.reply_text(
+            "Payment receive ho gaya, lekin video record nahi mila. Admin ko inform kar diya gaya hai."
+        )
+        await context.bot.send_message(
+            chat_id=ADMIN_ID,
+            text=f"⚠️ Paid order #{order['id']} — video record missing. User: {user_id}"
+        )
         return
 
     try:
         await context.bot.send_video(
             chat_id=user_id,
             video=video["file_id"],
-            caption=f"✅ Payment approved!\n🎬 {video['title']}"
+            caption=f"✅ Payment successful!\n🎬 {video['title']}\nEnjoy your video!"
         )
-
         with connect() as con:
             con.execute(
-                "UPDATE orders SET status='approved' WHERE id=?",
-                (order_id,)
+                "UPDATE orders SET status='delivered' WHERE id=? AND status='delivering'",
+                (order["id"],)
             )
-
-        await q.message.reply_text(
-            f"✅ Order #{order_id} approved and delivered."
-        )
-
-    except Exception as error:
-        logging.exception("Video delivery failed: %s", error)
-
+        await message.reply_text("⭐ 25 Stars payment successful. Video deliver kar diya gaya!")
+    except Exception:
+        logger.exception("Video delivery failed for paid order %s", order["id"])
         with connect() as con:
             con.execute(
-                "UPDATE orders SET status='submitted' WHERE id=?",
-                (order_id,)
+                "UPDATE orders SET status='delivery_pending' WHERE id=?",
+                (order["id"],)
             )
-
-        await q.message.reply_text(
-            f"Delivery failed for order #{order_id}. "
-            "Approve button dobara try kar sakte ho."
+        await message.reply_text(
+            "Payment successful hai, lekin video bhejne mein issue aaya. Admin ko notify kar diya hai."
+        )
+        await context.bot.send_message(
+            chat_id=ADMIN_ID,
+            text=(
+                f"⚠️ PAID VIDEO DELIVERY FAILED\n"
+                f"Order: #{order['id']}\nUser: {user_id}\n"
+                f"Use /retrydelivery {order['id']} after checking the video."
+            )
         )
 
 
-async def admin_upload(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
+async def retry_delivery(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_admin(update):
+        return
+    if len(context.args) != 1 or not context.args[0].isdigit():
+        await update.message.reply_text("Format: /retrydelivery ORDER_ID")
+        return
+
+    order_id = int(context.args[0])
+    with connect() as con:
+        con.execute("BEGIN IMMEDIATE")
+        order = con.execute(
+            """SELECT user_id,video_id,status FROM orders WHERE id=?""",
+            (order_id,)
+        ).fetchone()
+        if not order or order["status"] != "delivery_pending":
+            con.rollback()
+            await update.message.reply_text("Paid pending-delivery order nahi mila.")
+            return
+        video = con.execute(
+            "SELECT title,file_id FROM videos WHERE id=?",
+            (order["video_id"],)
+        ).fetchone()
+        if not video:
+            con.rollback()
+            await update.message.reply_text("Video record nahi mila.")
+            return
+        con.execute("UPDATE orders SET status='delivering' WHERE id=?", (order_id,))
+        con.commit()
+
+    try:
+        await context.bot.send_video(
+            chat_id=order["user_id"],
+            video=video["file_id"],
+            caption=f"✅ Your paid video: {video['title']}"
+        )
+        with connect() as con:
+            con.execute("UPDATE orders SET status='delivered' WHERE id=?", (order_id,))
+        await update.message.reply_text(f"Order #{order_id} delivered.")
+    except Exception:
+        logger.exception("Retry delivery failed for order %s", order_id)
+        with connect() as con:
+            con.execute("UPDATE orders SET status='delivery_pending' WHERE id=?", (order_id,))
+        await update.message.reply_text("Delivery abhi bhi fail hui. Hosting/video file check karo.")
+
+
+async def admin_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update):
         return
 
     caption = update.message.caption or ""
     parts = caption.split(maxsplit=2)
-
     if len(parts) < 3 or parts[0] != "/addvideo":
         await update.message.reply_text(
-            "Format:\n/addvideo 10 Video Name"
+            "Format (video caption):\n/addvideo 25 Video Name"
         )
         return
 
     try:
-        price = int(parts[1])
+        stars = int(parts[1])
         title = parts[2].strip()
-
-        if price <= 0 or not title:
+        if stars < 1 or not title:
             raise ValueError
-
     except ValueError:
-        await update.message.reply_text(
-            "Sahi format: /addvideo 10 Video Name"
-        )
+        await update.message.reply_text("Sahi format: /addvideo 25 Video Name")
         return
 
     with connect() as con:
         cur = con.execute(
-            """INSERT INTO videos (title,price,file_id)
-            VALUES (?,?,?)""",
-            (title, price, update.message.video.file_id)
+            """INSERT INTO videos (title,price,file_id,stars_price)
+               VALUES (?,?,?,?)""",
+            (title, stars, update.message.video.file_id, stars)
         )
         video_id = cur.lastrowid
 
     await update.message.reply_text(
-        f"✅ Video added!\n"
-        f"ID: {video_id}\n"
-        f"Name: {title}\n"
-        f"Price: ₹{price}"
+        f"✅ Video added!\nID: {video_id}\nName: {title}\nPrice: ⭐ {stars} Stars"
     )
-
-
-async def admin_photo(
-    update: Update,
-    context: ContextTypes.DEFAULT_TYPE
-):
-    if is_admin(update):
-        caption = update.message.caption or ""
-
-        if caption.strip() == "/setqr":
-            set_setting(
-                "qr",
-                update.message.photo[-1].file_id
-            )
-            await update.message.reply_text("✅ Paytm QR updated!")
-        else:
-            await update.message.reply_text(
-                "QR update karne ke liye photo caption mein /setqr likho."
-            )
-        return
-
-    await payment_proof(update, context)
 
 
 async def setprice(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update):
         return
-
     if len(context.args) != 2:
         await update.message.reply_text(
-            "Format: /setprice VIDEO_ID NEW_PRICE\n"
-            "Example: /setprice 1 15"
+            "Format: /setprice VIDEO_ID NEW_STARS\nExample: /setprice 1 25"
         )
         return
-
     try:
         video_id = int(context.args[0])
-        price = int(context.args[1])
-        if price <= 0:
+        stars = int(context.args[1])
+        if stars < 1:
             raise ValueError
     except ValueError:
-        await update.message.reply_text("Valid ID aur price enter karo.")
+        await update.message.reply_text("Valid video ID aur Stars amount enter karo.")
         return
 
     with connect() as con:
         cur = con.execute(
-            "UPDATE videos SET price=? WHERE id=?",
-            (price, video_id)
+            "UPDATE videos SET stars_price=? WHERE id=?",
+            (stars, video_id)
         )
-
     if cur.rowcount:
         await update.message.reply_text(
-            f"✅ Video #{video_id} ka price ₹{price} ho gaya."
+            f"✅ Video #{video_id} ka price ⭐ {stars} Stars ho gaya."
         )
     else:
         await update.message.reply_text("Video ID nahi mila.")
 
 
-async def showqr(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not is_admin(update):
-        return
-
-    qr = get_setting("qr")
-
-    if not qr:
-        await update.message.reply_text("Abhi QR set nahi hai.")
-        return
-
-    await context.bot.send_photo(
-        chat_id=ADMIN_ID,
-        photo=qr,
-        caption="Current Paytm QR"
-    )
-
-
 async def admin_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update):
         return
-
     await update.message.reply_text(
-        "👑 ADMIN COMMANDS\n\n"
-        "Video upload: video caption mein\n"
-        "/addvideo 10 Video Name\n\n"
-        "Price change:\n"
-        "/setprice 1 15\n\n"
-        "QR update: photo caption mein /setqr\n"
-        "/showqr - Current QR\n"
+        "👑 CLIPSMINES ADMIN COMMANDS\n\n"
+        "Video upload: video ke caption mein\n"
+        "/addvideo 25 Video Name\n\n"
+        "Price change (Stars):\n"
+        "/setprice 1 25\n\n"
+        "Failed paid delivery retry:\n"
+        "/retrydelivery ORDER_ID\n\n"
         "/videos - Video list"
     )
 
 
 def main():
     setup()
-
     app = Application.builder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("videos", videos))
     app.add_handler(CommandHandler("admin", admin_help))
     app.add_handler(CommandHandler("setprice", setprice))
-    app.add_handler(CommandHandler("showqr", showqr))
+    app.add_handler(CommandHandler("cancelorder", cancel_order))
+    app.add_handler(CommandHandler("retrydelivery", retry_delivery))
 
+    app.add_handler(CallbackQueryHandler(buy, pattern=r"^buy:"))
+    app.add_handler(PreCheckoutQueryHandler(precheckout))
     app.add_handler(
-        CallbackQueryHandler(buy, pattern=r"^buy:")
+        MessageHandler(filters.SUCCESSFUL_PAYMENT, successful_payment)
     )
-    app.add_handler(
-        CallbackQueryHandler(
-            admin_action,
-            pattern=r"^(approve|reject):"
-        )
-    )
-
     app.add_handler(
         MessageHandler(
             filters.VIDEO & filters.User(user_id=ADMIN_ID),
@@ -505,11 +490,7 @@ def main():
         )
     )
 
-    app.add_handler(
-        MessageHandler(filters.PHOTO, admin_photo)
-    )
-
-    print("Paid video bot is running...")
+    print("Clipsmines Stars payment bot is running...")
     app.run_polling()
 
 
