@@ -21,7 +21,7 @@
     .intro { max-width:590px; margin:0 auto; color:var(--muted); font-size:17px; line-height:1.7; }
     .panel { margin:44px auto 0; max-width:680px; padding:30px; border:1px solid #b98c354d; border-radius:18px; background:linear-gradient(145deg,#19150d,#101010 65%); box-shadow:0 18px 60px #0009; text-align:left; }
     .panel h2 { margin:0 0 18px; font-size:23px; text-align:center; }
-    .video-card { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:18px; border:1px solid #ffffff20; border-radius:12px; background:#ffffff08; }
+    .video-list { display:grid; gap:12px; }\n    .empty { margin:0; color:var(--muted); text-align:center; }\n    .video-card { display:flex; align-items:center; justify-content:space-between; gap:18px; padding:18px; border:1px solid #ffffff20; border-radius:12px; background:#ffffff08; }
     .video-card h3 { margin:0 0 6px; font-size:17px; }
     .video-card p { margin:0; color:var(--muted); font-size:13px; line-height:1.5; }
     a.cta { display:inline-block; padding:12px 18px; border-radius:9px; background:var(--gold); color:#171107; font-weight:800; text-decoration:none; white-space:nowrap; }
@@ -40,17 +40,51 @@
       <p class="intro">Discover video previews shared by Clipsmines. Open our Telegram bot to browse the current sample-video catalogue and play available previews.</p>
       <section class="panel">
         <h2>Sample Videos</h2>
-        <div class="video-card">
-          <div>
-            <h3>My First Video</h3>
-            <p>Sample video available in our Telegram catalogue.</p>
-          </div>
-          <a class="cta" href="https://telegram.me/Clipsminess" target="_blank" rel="noopener noreferrer">Watch on Telegram</a>
-        </div>
+        <div id="video-list" class="video-list"><p class="empty">Loading sample videos…</p></div>
       </section>
       <p class="note">Video playback is available in Telegram. This page does not collect payments or offer paid digital-video checkout.</p>
     </main>
     <footer>© <span id="year">2026</span> Clipsmines</footer>
+  </div>
+  <script>
+    async function loadVideos() {
+      const list = document.getElementById("video-list");
+      try {
+        const response = await fetch("./videos.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("Catalogue unavailable");
+        const videos = await response.json();
+        list.replaceChildren();
+        if (!Array.isArray(videos) || videos.length === 0) {
+          const empty = document.createElement("p");
+          empty.className = "empty";
+          empty.textContent = "No sample videos available right now.";
+          list.appendChild(empty);
+          return;
+        }
+        videos.forEach((video) => {
+          const card = document.createElement("div");
+          card.className = "video-card";
+          const info = document.createElement("div");
+          const title = document.createElement("h3");
+          title.textContent = video.title || "Sample video";
+          const desc = document.createElement("p");
+          desc.textContent = "Sample video available in our Telegram catalogue.";
+          const link = document.createElement("a");
+          link.className = "cta";
+          link.href = "https://telegram.me/Clipsminess";
+          link.target = "_blank";
+          link.rel = "noopener noreferrer";
+          link.textContent = "Watch on Telegram";
+          info.append(title, desc);
+          card.append(info, link);
+          list.appendChild(card);
+        });
+      } catch (error) {
+        list.textContent = "Sample catalogue is temporarily unavailable. Please try again later.";
+      }
+    }
+    loadVideos();
+  </script>
   </div>
 </body>
 </html>
