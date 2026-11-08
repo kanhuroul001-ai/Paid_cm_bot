@@ -490,8 +490,27 @@ def main():
         )
     )
 
-    print("Clipsmines Stars payment bot is running...")
-    app.run_polling()
+    # Render Free Web Services support HTTP webhooks, not a persistent polling worker.
+    external_url = os.environ.get("RENDER_EXTERNAL_URL", "").rstrip("/")
+    if not external_url.startswith("https://"):
+        raise RuntimeError(
+            "RENDER_EXTERNAL_URL is missing. Deploy this app as a Render Web Service."
+        )
+
+    webhook_path = os.environ.get("WEBHOOK_PATH") or secrets.token_urlsafe(24)
+    webhook_secret = os.environ.get("WEBHOOK_SECRET") or secrets.token_urlsafe(32)
+    port = int(os.environ.get("PORT", "10000"))
+    webhook_url = f"{external_url}/{webhook_path}"
+
+    logger.info("Starting Clipsmines Stars bot with Telegram webhook on port %s", port)
+    app.run_webhook(
+        listen="0.0.0.0",
+        port=port,
+        url_path=webhook_path,
+        webhook_url=webhook_url,
+        secret_token=webhook_secret,
+        allowed_updates=Update.ALL_TYPES,
+    )
 
 
 if __name__ == "__main__":
