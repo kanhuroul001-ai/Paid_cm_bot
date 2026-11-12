@@ -94,7 +94,7 @@
         pageMovies.forEach(movie=>{
           const card=document.createElement("article");card.className="video-card";
           const link=document.createElement("a");link.className="poster-link";link.href=movie.page||"movie.html";
-          const img=document.createElement("img");img.src=movie.poster;img.alt=(movie.title||"Movie")+" poster";img.loading="lazy";
+          const img=document.createElement("img");img.src=movie.poster;img.alt=(movie.title||"Movie")+" poster";img.loading="lazy";if(movie.posterFit==="contain"){img.style.objectFit="contain";img.style.background="#090909";}
           img.onerror=()=>{img.onerror=null;img.src="https://placehold.co/600x900/17120b/e8bd58?text=Movie";};
           link.appendChild(img);
           const title=document.createElement("h3");title.textContent=movie.title||"Movie";
