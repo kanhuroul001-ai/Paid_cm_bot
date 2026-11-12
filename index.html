@@ -26,7 +26,7 @@
     .search-form input:focus{border-color:var(--gold);box-shadow:0 0 0 2px #e8bd5830}
     .search-form button{min-height:44px;padding:0 22px;border:0;border-radius:9px;background:var(--gold);color:#171108;font-weight:800;font-size:14px;letter-spacing:1px;cursor:pointer}
     .search-form button:active{transform:scale(.98)}
-    .video-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .category-nav{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 auto 22px}\n    .category-nav span{padding:8px 14px;border:1px solid #8e702f;border-radius:20px;color:var(--gold);font-size:12px;font-weight:700;letter-spacing:.5px}\n    .video-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}\n    .pagination{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:26px}\n    .pagination button{padding:11px 24px;border:0;border-radius:9px;background:var(--gold);color:#171108;font-weight:800;letter-spacing:1px;cursor:pointer}\n    .pagination button:disabled{opacity:.35;cursor:not-allowed}\n    .page-number{color:var(--muted);font-size:13px}
     .video-card{min-width:0;text-align:left}
     .poster-link{display:block;overflow:hidden;border:2px solid transparent;border-image:linear-gradient(145deg,#e33b36,#e8bd58) 1;background:#15120c}
     .poster-link img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;transition:transform .2s}
@@ -48,11 +48,11 @@
       <p class="intro">Choose a movie poster to open its details and download page.</p>
       <section class="panel">
         <h2>Movies</h2>
-        <form class="search-form" id="search-form" role="search">
+        <nav class="category-nav" aria-label="Movie categories"><span>HINDI</span><span>SOUTH</span><span>BOLLYWOOD</span></nav>\n        <form class="search-form" id="search-form" role="search">
           <input id="movie-search" type="search" placeholder="Search movies..." aria-label="Search movies">
           <button type="submit">SEARCH</button>
         </form>
-        <div id="video-list" class="video-list"><p class="intro">Loading movies…</p></div>
+        <div id="video-list" class="video-list"><p class="intro">Loading movies…</p></div>\n        <div class="pagination" id="pagination" hidden><button id="prev-page" type="button" disabled>PREVIOUS</button><span class="page-number" id="page-number">Page 1</span><button id="next-page" type="button">NEXT</button></div>
       </section>
       <p class="note">Movies are listed only when distribution is permitted. Please check the licence and attribution on each movie page.</p>
     </main>
