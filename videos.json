@@ -12,7 +12,7 @@
     "download": "",
     "license": "Promotional poster image sourced from Cinema Express coverage; image rights belong to the respective rights holder.",
     "posterNote": "Promotional character poster image; external image source",
-    "posterFit": "contain"
+    "posterFit": "cover"
   },
   {
     "id": 1,
