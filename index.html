@@ -21,14 +21,14 @@
     .intro{max-width:600px;margin:0 auto;color:var(--muted);font-size:16px;line-height:1.7}
     .panel{margin:36px auto 0;max-width:850px;padding:26px;border:1px solid #b98c354d;border-radius:18px;background:linear-gradient(145deg,#19150d,#101010 65%);box-shadow:0 18px 60px #0009}
     .panel h2{margin:0 0 22px;font-size:22px}
-    .search-form{display:flex;gap:10px;max-width:520px;margin:0 auto 24px}
+    .search-form{display:flex;flex-direction:column;gap:10px;max-width:520px;margin:0 auto 24px}
     .search-form input{flex:1;min-width:0;padding:13px 15px;border:1px solid #8e702f;border-radius:9px;background:#090909;color:#f7f3e9;font-size:15px;outline:none}
     .search-form input:focus{border-color:var(--gold);box-shadow:0 0 0 2px #e8bd5830}
-    .search-form button{padding:0 22px;border:0;border-radius:9px;background:var(--gold);color:#171108;font-weight:800;font-size:14px;letter-spacing:1px;cursor:pointer}
+    .search-form button{min-height:44px;padding:0 22px;border:0;border-radius:9px;background:var(--gold);color:#171108;font-weight:800;font-size:14px;letter-spacing:1px;cursor:pointer}
     .search-form button:active{transform:scale(.98)}
-    .video-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:20px}
+    .video-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
     .video-card{min-width:0;text-align:left}
-    .poster-link{display:block;overflow:hidden;border:1px solid #ffffff25;border-radius:12px;background:#15120c}
+    .poster-link{display:block;overflow:hidden;border:2px solid transparent;border-image:linear-gradient(145deg,#e33b36,#e8bd58) 1;background:#15120c}
     .poster-link img{display:block;width:100%;aspect-ratio:2/3;object-fit:cover;transition:transform .2s}
     .poster-link:hover img{transform:scale(1.035)}
     .video-card h3{margin:12px 0 6px;font-size:17px}
@@ -69,7 +69,7 @@
       movies.forEach(movie=>{
         const card=document.createElement("article");card.className="video-card";
         const link=document.createElement("a");link.className="poster-link";link.href=movie.page||"movie.html";link.target="_blank";link.rel="noopener";
-        const img=document.createElement("img");img.src=movie.poster;img.alt=(movie.title||"Movie")+" poster";img.loading="lazy";
+        const img=document.createElement("img");img.src=movie.poster;img.alt=(movie.title||"Movie")+" poster";img.loading="lazy";img.onerror=()=>{img.onerror=null;img.src="https://placehold.co/600x900/17120b/e8bd58?text=Movie";};
         link.appendChild(img);
         const title=document.createElement("h3");title.textContent=movie.title||"Movie";
         const meta=document.createElement("p");meta.textContent=movie.year||"";
