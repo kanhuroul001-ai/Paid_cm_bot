@@ -41,6 +41,11 @@
     .note{margin:22px auto 0;color:#918a7c;font-size:12px;line-height:1.6;max-width:650px}
     footer{padding:24px 0 32px;border-top:1px solid #ffffff18;color:#807a70;text-align:center;font-size:12px}
     @media(max-width:420px){.panel{padding:20px 14px}.search-form button{padding:0 16px}.video-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
+  
+    .telegram-float{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:1000;display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border:1px solid #e8bd58;border-radius:999px;background:linear-gradient(135deg,#1b170e,#090909);color:#f7f3e9;text-decoration:none;font-size:13px;font-weight:800;letter-spacing:.4px;box-shadow:0 8px 28px #000b;transition:transform .2s,border-color .2s}
+    .telegram-float:hover{transform:translateY(-2px);border-color:#fff0b8}
+    .telegram-float svg{width:20px;height:20px;flex:none;fill:#2aabee}
+    @media(max-width:480px){.telegram-float{right:14px;bottom:calc(14px + env(safe-area-inset-bottom));padding:11px 15px;font-size:12px}}
   </style>
 </head>
 <body>
@@ -63,6 +68,11 @@
     </main>
     <footer>© 2026 ClipsMines</footer>
   </div>
+
+  <a class="telegram-float" href="https://telegram.me/+TXUQZNmGS-02Yjc1" target="_blank" rel="noopener noreferrer" aria-label="Join ClipsMines on Telegram">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.05 2.2a1.5 1.5 0 0 0-1.53-.22L2.1 9.25a1.5 1.5 0 0 0 .13 2.84l4.74 1.56 1.77 5.54a1.5 1.5 0 0 0 2.68.38l2.64-3.7 4.65 3.42a1.5 1.5 0 0 0 2.36-.92l2.84-14.6a1.5 1.5 0 0 0-.86-1.57ZM9.2 13.3l8.93-7.1-6.98 8.48-.35 3.2L9.2 13.3Z"/></svg>
+    <span>JOIN TELEGRAM</span>
+  </a>
   <script>
     let allMovies=[];
     let filteredMovies=[];
