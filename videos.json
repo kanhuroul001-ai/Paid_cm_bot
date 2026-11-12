@@ -5,5 +5,12 @@
     "year": "2008",
     "poster": "https://commons.wikimedia.org/wiki/Special:FilePath/Big_buck_bunny_poster_big.jpg",
     "page": "./movie.html"
+  },
+  {
+    "id": 2,
+    "title": "Jailer 2",
+    "year": "2026",
+    "poster": "https://m.media-amazon.com/images/S/pv-target-images/2cef3f6d5418b96f7427bbccf12523e8ffca7737c73945054614ca556c2d47b3._SX1080_FMjpg_.jpg",
+    "page": "https://www.primevideo.com/detail/0M0MP41XNWVO29LL977I63Z58J"
   }
 ]
