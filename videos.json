@@ -7,10 +7,11 @@
     "starcast": "Pramathesh Barua",
     "duration": "2h 11m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Devdas%201935",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23111c35%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f1d8a7%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23d89b53%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M120%20330%20C70%20260%2090%20180%20150%20155%20C210%20180%20220%20260%20170%20330%20Z%22%20fill%3D%22%23d89b53%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f1d8a7%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f1d8a7%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23d89b53%22%20stroke%3D%22%23f1d8a7%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23d89b53%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f1d8a7%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f1d8a7%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3EDEVDAS%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23d89b53%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1935%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=1",
     "download": "https://commons.wikimedia.org/wiki/File:Devdas_(1935).webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 2,
@@ -20,10 +21,11 @@
     "starcast": "K. L. Saigal, Leela Desai",
     "duration": "1h 51m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Dushman%201939",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2320333b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f0d9b6%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23c78b54%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M85%20320%20Q150%20180%20215%20320%20M105%20245%20Q150%20195%20195%20245%22%20fill%3D%22%23c78b54%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f0d9b6%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f0d9b6%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23c78b54%22%20stroke%3D%22%23f0d9b6%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23c78b54%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f0d9b6%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f0d9b6%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3EDUSHMAN%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23c78b54%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1939%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=2",
     "download": "https://commons.wikimedia.org/wiki/File:Dushman_(Hindi_movie,_1939).webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 3,
@@ -33,10 +35,11 @@
     "starcast": "Sitara Devi, Yakub",
     "duration": "1h 45m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Aabroo%201943",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23432b35%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f5d8bd%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23e1a66c%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M150%20145%20C110%20145%2090%20180%2095%20220%20L205%20220%20C210%20180%20190%20145%20150%20145%20Z%22%20fill%3D%22%23e1a66c%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f5d8bd%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f5d8bd%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23e1a66c%22%20stroke%3D%22%23f5d8bd%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23e1a66c%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f5d8bd%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f5d8bd%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3EAABROO%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23e1a66c%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1943%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=3",
     "download": "https://commons.wikimedia.org/wiki/File:Aabroo_(1943).webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 4,
@@ -46,10 +49,11 @@
     "starcast": "Motilal, Nargis",
     "duration": "1h 45m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Taqdeer%201943",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%231c3344%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f3d5b1%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23db6f65%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M80%20320%20Q150%20150%20220%20320%20M110%20265%20L190%20265%22%20fill%3D%22%23db6f65%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f3d5b1%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f3d5b1%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23db6f65%22%20stroke%3D%22%23f3d5b1%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23db6f65%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f3d5b1%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f3d5b1%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3ETAQDEER%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23db6f65%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1943%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=4",
     "download": "https://commons.wikimedia.org/wiki/File:Taqdeer_(1943)_1080p.webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 5,
@@ -59,10 +63,11 @@
     "starcast": "Shashikala, Begum Para, Prem Adib",
     "duration": "2h 03m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Chand%201944",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23392b4a%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f4dfb8%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23d7a64d%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M150%20120%20L225%20220%20L75%20220%20Z%20M95%20220%20L205%20220%20L205%20330%20L95%20330%20Z%22%20fill%3D%22%23d7a64d%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f4dfb8%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f4dfb8%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23d7a64d%22%20stroke%3D%22%23f4dfb8%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23d7a64d%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f4dfb8%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f4dfb8%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3ECHAND%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23d7a64d%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1944%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=5",
     "download": "https://commons.wikimedia.org/wiki/File:Chand_(1944).webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 6,
@@ -72,10 +77,11 @@
     "starcast": "Ragini, Najam",
     "duration": "1h 51m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Daasi%201944",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%233d2731%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f0d8b4%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23b77c52%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M105%20155%20Q150%20110%20195%20155%20L205%20300%20L95%20300%20Z%22%20fill%3D%22%23b77c52%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f0d8b4%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f0d8b4%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23b77c52%22%20stroke%3D%22%23f0d8b4%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23b77c52%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f0d8b4%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f0d8b4%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3EDAASI%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23b77c52%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1944%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=6",
     "download": "https://commons.wikimedia.org/wiki/File:Daasi_(1944)_from_YT.webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 7,
@@ -85,10 +91,11 @@
     "starcast": "Mehtab, Charlie",
     "duration": "2h 02m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Sanjog%201943",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23263a2f%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f6dfb2%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23d5a14f%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M75%20210%20Q150%20120%20225%20210%20M90%20210%20L90%20325%20L210%20325%20L210%20210%22%20fill%3D%22%23d5a14f%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f6dfb2%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f6dfb2%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23d5a14f%22%20stroke%3D%22%23f6dfb2%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23d5a14f%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f6dfb2%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f6dfb2%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3ESANJOG%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23d5a14f%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1943%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=7",
     "download": "https://commons.wikimedia.org/wiki/File:Sanjog_(1943).webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 8,
@@ -98,10 +105,11 @@
     "starcast": "Prem Adib, Shobhana Samarth",
     "duration": "2h 34m",
     "genre": "Mythological",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Bharat%20Milap%201942",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%233d2b22%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f8e4b7%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23d8ad52%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M150%20105%20L210%20165%20L150%20225%20L90%20165%20Z%20M110%20235%20L190%20235%20L190%20330%20L110%20330%20Z%22%20fill%3D%22%23d8ad52%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f8e4b7%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f8e4b7%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23d8ad52%22%20stroke%3D%22%23f8e4b7%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23d8ad52%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f8e4b7%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f8e4b7%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2219%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3EBHARAT%20MILAP%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23d8ad52%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1942%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=8",
     "download": "https://commons.wikimedia.org/wiki/File:Bharat_Milap_(1942).webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 9,
@@ -111,10 +119,11 @@
     "starcast": "Mazhar Khan, Gajanan Jagirdar",
     "duration": "2h 10m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Padosi%201941",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%233b2441%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f6d9b5%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23d96f5e%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M75%20320%20Q110%20220%20150%20260%20Q190%20220%20225%20320%22%20fill%3D%22%23d96f5e%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f6d9b5%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f6d9b5%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23d96f5e%22%20stroke%3D%22%23f6d9b5%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23d96f5e%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f6d9b5%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f6d9b5%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3EPADOSI%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23d96f5e%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1941%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=9",
     "download": "https://commons.wikimedia.org/wiki/File:Padosi,_1941.webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   },
   {
     "id": 10,
@@ -124,9 +133,10 @@
     "starcast": "Sheikh Mukhtar, Nalini Jaywant",
     "duration": "2h 27m",
     "genre": "Drama",
-    "poster": "https://placehold.co/600x900/17120b/e8bd58?text=Bahen%201941",
+    "poster": "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22600%22%20height%3D%22900%22%20viewBox%3D%220%200%20300%20450%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2323344b%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23090d16%22%2F%3E%3C%2FlinearGradient%3E%3Cpattern%20id%3D%22p%22%20width%3D%2218%22%20height%3D%2218%22%20patternUnits%3D%22userSpaceOnUse%22%3E%3Cpath%20d%3D%22M0%2018L18%200%22%20stroke%3D%22%23f5dfc1%22%20stroke-opacity%3D%22.08%22%2F%3E%3C%2Fpattern%3E%3C%2Fdefs%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23g)%22%2F%3E%3Crect%20width%3D%22300%22%20height%3D%22450%22%20fill%3D%22url(%23p)%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22210%22%20r%3D%22105%22%20fill%3D%22%23c58a68%22%20opacity%3D%22.2%22%2F%3E%3Cpath%20d%3D%22M105%20145%20Q150%20105%20195%20145%20L210%20315%20L90%20315%20Z%22%20fill%3D%22%23c58a68%22%20fill-opacity%3D%22.65%22%20stroke%3D%22%23f5dfc1%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%22150%22%20cy%3D%22150%22%20r%3D%2232%22%20fill%3D%22%23f5dfc1%22%20opacity%3D%22.85%22%2F%3E%3Cpath%20d%3D%22M105%20325%20Q150%20275%20195%20325%20L220%20370%20L80%20370%20Z%22%20fill%3D%22%23c58a68%22%20stroke%3D%22%23f5dfc1%22%20stroke-width%3D%222%22%2F%3E%3Cpath%20d%3D%22M35%2055H265%20M35%20395H265%22%20stroke%3D%22%23c58a68%22%20stroke-width%3D%223%22%2F%3E%3Ctext%20x%3D%22150%22%20y%3D%2275%22%20fill%3D%22%23f5dfc1%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%224%22%20text-anchor%3D%22middle%22%3ECLASSIC%20INDIAN%20CINEMA%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22420%22%20fill%3D%22%23f5dfc1%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2225%22%20font-weight%3D%22bold%22%20text-anchor%3D%22middle%22%3EBAHEN%3C%2Ftext%3E%3Ctext%20x%3D%22150%22%20y%3D%22440%22%20fill%3D%22%23c58a68%22%20font-family%3D%22Georgia%2Cserif%22%20font-size%3D%2212%22%20letter-spacing%3D%223%22%20text-anchor%3D%22middle%22%3E1941%3C%2Ftext%3E%3C%2Fsvg%3E",
     "page": "./movie.html?id=10",
     "download": "https://commons.wikimedia.org/wiki/File:Bahen_(1941)_1080p.webm",
-    "license": "Public domain in India — see Wikimedia Commons file page"
+    "license": "Public domain in India — see Wikimedia Commons file page",
+    "posterNote": "Original custom illustrated poster artwork"
   }
 ]
