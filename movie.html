@@ -14,9 +14,16 @@
     .brand{color:var(--gold);font-weight:800;letter-spacing:2px;text-decoration:none}
     main{padding:30px 0 50px}
     h1{font-size:clamp(30px,7vw,44px);margin:8px 0 10px}
+    h2{font-size:20px;margin:26px 0 12px}
     .muted{color:var(--muted);line-height:1.65}
+    .details{margin:22px 0;padding:18px;border:1px solid #8e713766;border-radius:12px;background:#14120e}
+    .detail-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #ffffff15}
+    .detail-row:last-child{border-bottom:0}
+    .detail-row strong{color:var(--gold)}
+    .detail-row span{text-align:right;color:#eee8dc}
     .ad-slot{min-height:110px;margin:22px 0;padding:18px;border:1px dashed #8e7137;border-radius:12px;background:#111;text-align:center;color:#958b77;display:flex;align-items:center;justify-content:center;font-size:13px}
     .download{display:block;width:100%;margin:20px 0;padding:16px;border:0;border-radius:10px;background:var(--gold);color:#171107;font-size:17px;font-weight:800;text-align:center;text-decoration:none}
+    .screenshot-box{min-height:190px;border:1px dashed #8e7137;border-radius:12px;background:#111;display:flex;align-items:center;justify-content:center;padding:18px;color:#958b77;text-align:center;font-size:14px}
     .credit{font-size:12px;color:#a9a08f;line-height:1.6}
     .back{color:var(--gold);text-decoration:none}
   </style>
@@ -27,11 +34,20 @@
     <main>
       <a class="back" href="./index.html">← Back to movies</a>
       <h1>Big Buck Bunny</h1>
-      <p class="muted">2008 · Animated short film · Approx. 10 minutes</p>
-      <p class="muted">Original version. This short is mostly visual comedy and has no Hindi dubbing.</p>
+      <section class="details" aria-label="Movie details">
+        <div class="detail-row"><strong>Name</strong><span>Big Buck Bunny</span></div>
+        <div class="detail-row"><strong>Language</strong><span>English (no spoken dialogue)</span></div>
+        <div class="detail-row"><strong>Release Date</strong><span>30 May 2008</span></div>
+        <div class="detail-row"><strong>Duration</strong><span>Approx. 10 minutes</span></div>
+        <div class="detail-row"><strong>Genre</strong><span>Animation · Comedy · Short</span></div>
+        <div class="detail-row"><strong>Starcast</strong><span>Animated characters</span></div>
+        <div class="detail-row"><strong>Size</strong><span>Varies by download version</span></div>
+      </section>
       <div class="ad-slot">Advertisement space 1 — ad code can be added here</div>
       <div class="ad-slot">Advertisement space 2 — ad code can be added here</div>
       <a class="download" href="https://peach.blender.org/download/" target="_blank" rel="noopener noreferrer">DOWNLOAD HERE</a>
+      <h2>Screenshot</h2>
+      <div class="screenshot-box">Screenshot space — movie screenshots can be added here</div>
       <div class="ad-slot">Advertisement space 3 — ad code can be added here</div>
       <p class="credit">Licence: Creative Commons Attribution 3.0 (CC BY 3.0). Attribution: © copyright 2008, Blender Foundation / www.bigbuckbunny.org. The original end credits must remain included when redistributing the complete film. <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer" style="color:#e8bd58">View licence</a>.</p>
       <div class="ad-slot">Advertisement space 4 — ad code can be added here</div>
