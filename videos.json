@@ -1,5 +1,20 @@
 [
   {
+    "id": 11,
+    "title": "Ramayana: Part 1",
+    "year": "2026",
+    "language": "Hindi, Tamil, Telugu, Kannada, Malayalam",
+    "starcast": "Yash as Ravana, Ranbir Kapoor, Sai Pallavi, Sunny Deol, Ravi Dubey",
+    "duration": "Not confirmed",
+    "genre": "Mythological / Epic",
+    "poster": "https://cf-images.assettype.com/cinemaexpress/2026-09-27/flwnu1p7/ranbiryashravana.jpg?auto=format%2Ccompress&fit=max&w=1600",
+    "page": "./movie.html?id=11",
+    "download": "",
+    "license": "Promotional poster image sourced from Cinema Express coverage; image rights belong to the respective rights holder.",
+    "posterNote": "Promotional character poster image; external image source",
+    "posterFit": "contain"
+  },
+  {
     "id": 1,
     "title": "Devdas",
     "year": "1935",
@@ -138,19 +153,5 @@
     "download": "https://commons.wikimedia.org/wiki/File:Bahen_(1941)_1080p.webm",
     "license": "Public domain in India — see Wikimedia Commons file page",
     "posterNote": "Original custom illustrated poster artwork"
-  },
-  {
-    "id": 11,
-    "title": "Ramayana",
-    "year": "2026",
-    "language": "Hindi, Tamil, Telugu, Kannada, Malayalam",
-    "starcast": "Yash as Ravana, Ranbir Kapoor, Sai Pallavi, Sunny Deol, Ravi Dubey",
-    "duration": "Not confirmed",
-    "genre": "Mythological / Epic",
-    "poster": "https://cf-images.assettype.com/cinemaexpress/2026-09-27/flwnu1p7/ranbiryashravana.jpg?auto=format%2Ccompress&fit=max&w=1600",
-    "page": "./movie.html?id=11",
-    "download": "",
-    "license": "Promotional poster image sourced from Cinema Express coverage; image rights belong to the respective rights holder.",
-    "posterNote": "Promotional character poster image; external image source"
   }
 ]
