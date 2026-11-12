@@ -11,8 +11,8 @@
     *{box-sizing:border-box}
     body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -20%,#3a2b0d 0,transparent 48%),#090909;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}
     .wrap{width:min(960px,calc(100% - 32px));margin:auto}
-    header{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid #ffffff18}
-    .brand{font-size:20px;font-weight:900;letter-spacing:2px;background:linear-gradient(90deg,#ff4d4d,#ffb347,#fff176,#4ade80,#38bdf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 18px #e8bd5830}
+    header{position:relative;display:flex;justify-content:flex-end;align-items:center;padding:24px 0;border-bottom:1px solid #ffffff18}
+    .brand{position:absolute;left:50%;transform:translateX(-50%);font-size:20px;font-weight:900;letter-spacing:2px;white-space:nowrap;background:linear-gradient(90deg,#ff4d4d,#ffb347,#fff176,#4ade80,#38bdf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 0 18px #e8bd5830}
     .tag{color:var(--muted);font-size:12px;line-height:1.45;letter-spacing:1.5px;text-transform:uppercase;text-align:right;max-width:110px}
     main{padding:55px 0;text-align:center}
     .eyebrow{color:var(--gold);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase}
